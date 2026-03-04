@@ -1,120 +1,111 @@
-# California House Price Prediction (Random Forest)
+California House Price Prediction 🏠📊
+Project Overview
 
-A simple end-to-end **regression** project that predicts **California median house values** using the **scikit-learn California Housing dataset** and a **Random Forest Regressor**.
+This project focuses on predicting house prices using Machine Learning techniques.
+The California Housing dataset is used to train regression models that estimate house prices based on various features such as income, house age, number of rooms, population, and geographical location.
 
-This repository is centered around a single Jupyter notebook:
-- `house_price_rf.ipynb`
+The main objective of this project is to understand the complete machine learning workflow, including data preprocessing, feature analysis, model training, and model evaluation.
 
-The notebook covers:
-- Data loading (`fetch_california_housing`)
-- Exploratory Data Analysis (EDA) and visualizations
-- Train/test split
-- Model training with `RandomForestRegressor`
-- Evaluation using RMSE, MAE, and R²
-- Feature importance visualization
+Dataset
 
----
+The dataset contains housing information collected from different districts in California.
 
-## Dataset
+Some important features include:
 
-The notebook uses:
+MedInc – Median income in the area
 
-- **Source:** `sklearn.datasets.fetch_california_housing(as_frame=True)`
-- **Rows:** 20,640
-- **Features (8 numeric):**
-  - `MedInc` – median income in block group
-  - `HouseAge` – median house age in block group
-  - `AveRooms` – average number of rooms per household
-  - `AveBedrms` – average number of bedrooms per household
-  - `Population` – block group population
-  - `AveOccup` – average number of household members
-  - `Latitude` – block group latitude
-  - `Longitude` – block group longitude
-- **Target:** `MedHouseVal` (median house value, in units of $100,000)
+HouseAge – Average age of houses
 
----
+AveRooms – Average number of rooms
 
-## Model
+AveBedrms – Average number of bedrooms
 
-- **Algorithm:** Random Forest Regression
-- **Implementation:** `sklearn.ensemble.RandomForestRegressor`
-- **Parameters (current notebook):**
-  - `n_estimators=200`
-  - `random_state=42`
-  - `n_jobs=-1`
+Population – Total population in the area
 
----
+AveOccup – Average house occupancy
 
-## Results (from the current notebook run)
+Latitude & Longitude – Location coordinates
 
-On the held-out test set, the notebook reports approximately:
+The target variable is:
 
-- **RMSE:** ~0.5040 (≈ **$50,396**)
-- **MAE:** ~0.3268 (≈ **$32,681**)
-- **R²:** ~0.8062
+MedHouseVal – Median house value.
 
-> Note: `MedHouseVal` is in $100,000 units, so the notebook multiplies errors by `100000` to show approximate USD.
+Machine Learning Workflow ⚙️
 
----
+The following steps were performed in this project:
 
-## Visualizations
+Importing required libraries (Pandas, NumPy, Matplotlib, Scikit-learn)
 
-The notebook includes:
+Loading and exploring the dataset
 
-- Target distribution histogram (`MedHouseVal`)
-- Correlation heatmap
-- Scatter plot: `MedInc` vs `MedHouseVal`
-- Geo-scatter plot (Longitude/Latitude) colored by house value
-- Feature importance bar chart
+Checking dataset structure using info() and head()
 
----
+Handling missing values
 
-## How to Run
+Data visualization using histograms
 
-### Option A: Run in Jupyter Notebook (recommended)
+Converting categorical variables into numerical format
 
-1. Clone the repository
-2. Create and activate a virtual environment
-3. Install dependencies
-4. Open the notebook
+Correlation analysis between features
 
-Example (Windows / PowerShell):
+Separating features (X) and target variable (y)
 
-```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -U pip
-pip install numpy pandas matplotlib seaborn scikit-learn
-jupyter notebook
-```
+Splitting the dataset into training and testing sets
 
-Then open:
-- `house_price_rf.ipynb`
+Training machine learning models
 
-### Option B: Google Colab
+Making predictions on test data
 
-Upload `house_price_rf.ipynb` to Colab and run the cells.
+Evaluating model performance
 
----
+Models Used 🤖
 
-## Known Issue / Note about Feature Engineering
+Two regression models were implemented:
 
-The notebook currently contains a feature engineering cell that references a column named `Households`:
+1. Linear Regression
 
-```python
-df['RoomsPerHousehold'] = df['AveRooms'] / df['Households']
-df['BedroomsPerHousehold'] = df['AveBedrms'] / df['Households']
-df['PopulationPerHousehold'] = df['Population'] / df['Households']
-```
+A basic regression algorithm that models the relationship between independent variables and the target variable using a linear equation.
 
-However, the **scikit-learn California Housing dataset does not include a `Households` column**, so this cell will raise a `KeyError` if executed.
+2. Random Forest Regressor
 
-If you want to keep ratio-based features, you can either:
-- Remove this cell (the project works fine without it), or
-- Switch to a dataset that includes household counts.
+An ensemble learning method that combines multiple decision trees to improve prediction accuracy and reduce overfitting.
 
----
+Model Evaluation 📈
 
-## License
+The models were evaluated using the following metrics:
 
-If you plan to publish this on GitHub, consider adding a license (e.g., MIT License).
+Mean Absolute Error (MAE)
+
+Mean Squared Error (MSE)
+
+R² Score
+
+These metrics help measure how accurately the model predicts house prices.
+
+Results
+
+After training and evaluation, the Random Forest model performed better than Linear Regression, as it can capture more complex relationships in the data.
+
+Technologies Used 💻
+
+Python
+
+Pandas
+
+NumPy
+
+Matplotlib
+
+Scikit-learn
+
+Jupyter Notebook
+
+Project Structure
+California-House-Price-Prediction
+│
+├── California_houseprice.ipynb
+├── README.md
+Conclusion
+
+This project demonstrates how machine learning can be applied to predict housing prices using real-world data.
+By comparing multiple models, we can identify which algorithm provides better prediction accuracy for the given dataset.
